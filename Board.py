@@ -1,5 +1,11 @@
 
-
+def evaluation(board):
+    sum=12
+    for i in range(board):
+        for j in range(board[i]):
+            if board[i][j]==1 or board[i][j]==2:
+                sum=sum-i
+    return sum
 class Board:
     def __init__(self, turn = 1):
         self.size = 4
