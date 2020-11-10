@@ -33,8 +33,8 @@ class Board:
 
     def evaluate(self):
         sum = 12
-        for i in range(board):
-            for j in range(board[i]):
+        for i in range(self.board):
+            for j in range(self.board[i]):
                 if self.board[i][j] == 1 or self.board[i][j] == 2:
                     sum = sum - i
         return sum
@@ -77,15 +77,22 @@ class Board:
 
 
 
-    def minmax(self, x, y, depth, wantMax, board):
-        if depth == 0 or board.checkWinner() != -1:
-            return board.evaluate()
+    def minmax(self, move, depth, wantMax):
+        if depth == 0 or self.checkWinner() != -1:
+            return self.evaluate()
 
         if wantMax == 1: #we want to maximize the score if the player is the AI
-            maxEval = float(12)
+            maxEval = -12
             best_move = None
-            for move in self.checkPossibleMoves(2):
-                pass
+            evals=[]
+            for m in self.checkPossibleMoves(2):
+                self.board.move(2,m[0][0],m[0][1],m[1][0],m[1][1])
+                evals.append(self.minmax(m,depth-1,0))
+                self.board.move(2,m[1][0],m[1][1],m[0][0],m[0][1])
+            print(evals)
+            
+            return (max(evals),self.checkPossibleMoves(2).index(max(moves))
+
         elif wantMax == 0: #minimize the score of the opposing player (the human)
             pass
         
