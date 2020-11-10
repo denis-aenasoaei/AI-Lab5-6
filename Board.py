@@ -90,8 +90,7 @@ class Board:
                 evals.append(self.minmax(m,depth-1,0))
                 self.board.move(2,m[1][0],m[1][1],m[0][0],m[0][1])
             print(evals)
-            
-            return (max(evals),self.checkPossibleMoves(2).index(max(moves))
+            return max(evals), self.checkPossibleMoves(2)[evals.index(max(evals))]
 
         elif wantMax == 0: #minimize the score of the opposing player (the human)
             pass
